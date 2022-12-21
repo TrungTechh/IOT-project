@@ -1,0 +1,839 @@
+[
+    {
+        "id": "62a942e85f50e1ea",
+        "type": "tab",
+        "label": "Project flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "67448c014d734ad8",
+        "type": "ui_gauge",
+        "z": "62a942e85f50e1ea",
+        "name": "",
+        "group": "8cf51292649e182c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Nhiệt độ",
+        "label": "độ C",
+        "format": "{{msg.payload.temp}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "751605cb04a6f25f",
+        "type": "ui_gauge",
+        "z": "62a942e85f50e1ea",
+        "name": "",
+        "group": "8cf51292649e182c",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "gtype": "wave",
+        "title": "Độ ẩm",
+        "label": "%",
+        "format": "{{msg.payload.humi}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 670,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "439e8672f99d9533",
+        "type": "mqtt out",
+        "z": "62a942e85f50e1ea",
+        "name": "",
+        "topic": "chicken_egg_system/light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d672d1c9bbd2bfe3",
+        "x": 1710,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "3b6c1261da01e8cb",
+        "type": "file",
+        "z": "62a942e85f50e1ea",
+        "name": "WriteFile",
+        "filename": "/home/debian/Documents/time-schedule0.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1440,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "346b31ad62560f4c",
+        "type": "ui_switch",
+        "z": "62a942e85f50e1ea",
+        "name": "",
+        "label": "Đèn 1",
+        "tooltip": "",
+        "group": "abdfa8cbcd991a2b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 1430,
+        "y": 420,
+        "wires": [
+            [
+                "439e8672f99d9533"
+            ]
+        ]
+    },
+    {
+        "id": "91de9445da3a1160",
+        "type": "ui_time_scheduler",
+        "z": "62a942e85f50e1ea",
+        "group": "abdfa8cbcd991a2b",
+        "name": "",
+        "startDay": "0",
+        "refresh": "5",
+        "devices": [
+            "Đèn 1"
+        ],
+        "singleOff": false,
+        "onlySendChange": true,
+        "customPayload": false,
+        "eventMode": false,
+        "eventOptions": [],
+        "sendTopic": false,
+        "lat": "",
+        "lon": "",
+        "customContextStore": "",
+        "outputs": 2,
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "x": 1230,
+        "y": 400,
+        "wires": [
+            [
+                "3b6c1261da01e8cb"
+            ],
+            [
+                "346b31ad62560f4c"
+            ]
+        ]
+    },
+    {
+        "id": "774ffa3d9ad76e25",
+        "type": "mqtt in",
+        "z": "62a942e85f50e1ea",
+        "name": "",
+        "topic": "chicken_egg_system/temp_&_humi",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d672d1c9bbd2bfe3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 380,
+        "wires": [
+            [
+                "67448c014d734ad8",
+                "751605cb04a6f25f",
+                "cb034b402bd51892",
+                "6b78c3da8fdfb7c4",
+                "89790fc947e1f248"
+            ]
+        ]
+    },
+    {
+        "id": "cb034b402bd51892",
+        "type": "debug",
+        "z": "62a942e85f50e1ea",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "6b78c3da8fdfb7c4",
+        "type": "switch",
+        "z": "62a942e85f50e1ea",
+        "name": "Check nhiệt độ",
+        "property": "payload.temp",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "27",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "23",
+                "vt": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "23",
+                "vt": "num",
+                "v2": "27",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 700,
+        "y": 220,
+        "wires": [
+            [
+                "b0f4a9e586111c50"
+            ],
+            [
+                "0b709aa45f73cf71"
+            ],
+            [
+                "acc8119a45228b74"
+            ]
+        ]
+    },
+    {
+        "id": "b0f4a9e586111c50",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "cảnh báo nhiệt độ cao",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Cảnh báo!! Nhiệt độ đang lên cao. Nhiệt độ hợp lý là khoảng 23 - 27°C.",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 160,
+        "wires": [
+            [
+                "c724fabccafb8c66"
+            ]
+        ]
+    },
+    {
+        "id": "0b709aa45f73cf71",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "cảnh báo nhiệt độ thấp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Cảnh báo !! Nhiệt độ đang hạ thấp. Nhiệt độ hợp lý là khoảng 23 - 27°C",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 220,
+        "wires": [
+            [
+                "c724fabccafb8c66"
+            ]
+        ]
+    },
+    {
+        "id": "acc8119a45228b74",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "nhiệt độ hợp lý",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Nhiệt độ hợp lý. Nhiệt độ đang trong khoảng 23 - 27°C",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 280,
+        "wires": [
+            [
+                "c724fabccafb8c66"
+            ]
+        ]
+    },
+    {
+        "id": "c724fabccafb8c66",
+        "type": "ui_text",
+        "z": "62a942e85f50e1ea",
+        "group": "3b04dc23429f10e5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Thông báo nhiệt độ",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1170,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8e4cf8535cfeefbf",
+        "type": "mqtt in",
+        "z": "62a942e85f50e1ea",
+        "name": "",
+        "topic": "chicken_egg_system/day_status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d672d1c9bbd2bfe3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 780,
+        "wires": [
+            [
+                "962af457b4d6e2bf"
+            ]
+        ]
+    },
+    {
+        "id": "962af457b4d6e2bf",
+        "type": "switch",
+        "z": "62a942e85f50e1ea",
+        "name": "Kiểm tra sáng/tối và gửi thông báo",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "neq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 620,
+        "y": 780,
+        "wires": [
+            [
+                "b8db1a364e5e3ec1"
+            ],
+            [
+                "8aa57f0ed9b892b5"
+            ]
+        ]
+    },
+    {
+        "id": "b8db1a364e5e3ec1",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "Trời tối",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Trời đã tối",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 720,
+        "wires": [
+            [
+                "29e902fb414348f4",
+                "9d350dccb2953325"
+            ]
+        ]
+    },
+    {
+        "id": "8aa57f0ed9b892b5",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "Trời sáng",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Trời đã sáng",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 820,
+        "wires": [
+            [
+                "29e902fb414348f4",
+                "9d350dccb2953325"
+            ]
+        ]
+    },
+    {
+        "id": "29e902fb414348f4",
+        "type": "ui_text",
+        "z": "62a942e85f50e1ea",
+        "group": "3b04dc23429f10e5",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Thông báo ngày/đêm",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1140,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "89790fc947e1f248",
+        "type": "switch",
+        "z": "62a942e85f50e1ea",
+        "name": "Check độ ẩm",
+        "property": "payload.temp",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "27",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "23",
+                "vt": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "23",
+                "vt": "num",
+                "v2": "27",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 690,
+        "y": 600,
+        "wires": [
+            [
+                "50c1ed17bedb2922"
+            ],
+            [
+                "3fdadee2967e9b62"
+            ],
+            [
+                "afe3c97a47353968"
+            ]
+        ]
+    },
+    {
+        "id": "50c1ed17bedb2922",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "cảnh báo độ ẩm cao",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Độ ẩm cao. Độ ẩm hợp lý là khoảng 60 - 70%.",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 540,
+        "wires": [
+            [
+                "40a87f786316b678"
+            ]
+        ]
+    },
+    {
+        "id": "3fdadee2967e9b62",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "cảnh báo độ ẩm thấp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Độ ẩm thấp. Độ ẩm hợp lý là khoảng 60 - 70%.",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 600,
+        "wires": [
+            [
+                "40a87f786316b678"
+            ]
+        ]
+    },
+    {
+        "id": "afe3c97a47353968",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "độ ẩm hợp lý",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Độ ẩm hợp lý. Độ ẩm đang trong khoảng 60-70%",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 660,
+        "wires": [
+            [
+                "40a87f786316b678"
+            ]
+        ]
+    },
+    {
+        "id": "40a87f786316b678",
+        "type": "ui_text",
+        "z": "62a942e85f50e1ea",
+        "group": "3b04dc23429f10e5",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Thông báo độ ẩm",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1170,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "9d350dccb2953325",
+        "type": "ui_text",
+        "z": "62a942e85f50e1ea",
+        "group": "4f159cda3bc2c932",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Hiển thị ngày/đêm",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1130,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "a0f12490c7fabc5a",
+        "type": "mqtt in",
+        "z": "62a942e85f50e1ea",
+        "name": "",
+        "topic": "chicken_egg_system/pir_status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d672d1c9bbd2bfe3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 960,
+        "wires": [
+            [
+                "489546caf0cb7090"
+            ]
+        ]
+    },
+    {
+        "id": "489546caf0cb7090",
+        "type": "switch",
+        "z": "62a942e85f50e1ea",
+        "name": "Kiểm tra hoạt động của gà",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "neq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 600,
+        "y": 960,
+        "wires": [
+            [
+                "88510eeab045d77f"
+            ],
+            [
+                "06ea96ac75fc90e0"
+            ]
+        ]
+    },
+    {
+        "id": "88510eeab045d77f",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "Gà đang trong chuồng",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Gà đang trong chuồng",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 940,
+        "y": 900,
+        "wires": [
+            [
+                "81220ae9275245a6"
+            ]
+        ]
+    },
+    {
+        "id": "06ea96ac75fc90e0",
+        "type": "change",
+        "z": "62a942e85f50e1ea",
+        "name": "Gà không có trong chuồng",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Gà không có trong chuồng",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 1000,
+        "wires": [
+            [
+                "81220ae9275245a6"
+            ]
+        ]
+    },
+    {
+        "id": "81220ae9275245a6",
+        "type": "ui_text",
+        "z": "62a942e85f50e1ea",
+        "group": "4f159cda3bc2c932",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Hiển thị trạng thái của gà",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1270,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "8cf51292649e182c",
+        "type": "ui_group",
+        "name": "Status",
+        "tab": "0a794ddd48cc1dac",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d672d1c9bbd2bfe3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "abdfa8cbcd991a2b",
+        "type": "ui_group",
+        "name": "Scheduler",
+        "tab": "0a794ddd48cc1dac",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3b04dc23429f10e5",
+        "type": "ui_group",
+        "name": "Notification",
+        "tab": "0a794ddd48cc1dac",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4f159cda3bc2c932",
+        "type": "ui_group",
+        "name": "More information",
+        "tab": "0a794ddd48cc1dac",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0a794ddd48cc1dac",
+        "type": "ui_tab",
+        "name": "Trang chủ",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
